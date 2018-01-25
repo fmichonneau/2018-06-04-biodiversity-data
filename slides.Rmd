@@ -1,7 +1,7 @@
 ---
 title: "A State of Knowledge of Marine Invertebrate Biodiversity in the US"
 subtitle: ""
-author: "François Michonneau, <br> Postdoctoral Researcher, Whitney Lab/FLMNH"
+author: "François Michonneau, <br> Postdoctoral Researcher, Whitney Lab/FLMNH <br><br> Gustav Paulay, Mark Martindale"
 date: "Jan 25th, 2018"
 output:
   xaringan::moon_reader:
@@ -149,7 +149,7 @@ data.frame(
 ### Goals
 #### Evaluate completeness
 #### Identify knowledge gaps
-#### Offer recommendations
+#### Provide recommendations
 
 ---
 
@@ -220,6 +220,10 @@ kingdom_diversity %>%
 
 ### At least 30,000 species of marine invertebrates in the US.
 
+--
+
+## How long is it going to take to complete?
+
 ---
 
 
@@ -269,6 +273,8 @@ idigbio_us_inverts_records_all  %>%
 ## Improve existing data
 
 * clean up species names, add geographic coordinates
+
+--
 
 ## Use molecular data to speed up biodiversity documentation
 
@@ -352,13 +358,16 @@ bold_data %>%
 
 # Thank you
 
-* UFBI
-* The Whitney Lab
-* Biodiversity Information Systems:
+### UF Biodiversity Institute
+
+### The Whitney Lab
+
+### Biodiversity Information Systems:
   - iDigBio
   - GBIF
   - OBIS
-* rOpenSci
+
+### rOpenSci
 
 ---
 class: inverse, center, middle
@@ -366,9 +375,7 @@ class: inverse, center, middle
 # Questions?
 
 
-```{r end}
-
+```{r end, echo=FALSE}
 delete_bindings()
 setwd(owd)
-
 ```
