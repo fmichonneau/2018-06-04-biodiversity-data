@@ -238,6 +238,7 @@ idig_spp_through_time
 
 # Taxonomic expertise is dwindling
 
+--
 
 ```{r, dev="CairoSVG", echo=FALSE, warning=FALSE, message=FALSE, fig.height=5.5, fig.width=9.5, cache=TRUE}
 
