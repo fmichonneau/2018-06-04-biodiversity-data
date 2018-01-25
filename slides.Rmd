@@ -206,6 +206,8 @@ kingdom_diversity %>%
     theme_ipsum(base_family = "Ubuntu Condensed", base_size=15)
 ```
 
+--
+
 ### Number of samples:
   - 3 records per species for Invertebrates
   - 18 records per species for Vertebrates
