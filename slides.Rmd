@@ -1,0 +1,374 @@
+---
+title: "A State of Knowledge of Marine Invertebrate Biodiversity in the US"
+subtitle: ""
+author: "François Michonneau, <br> Postdoctoral Researcher, Whitney Lab/FLMNH"
+date: "Jan 25th, 2018"
+output:
+  xaringan::moon_reader:
+    css: [default, my-fonts.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(remake)
+library(devtools)
+library(remake)
+library(hrbrthemes)
+
+load_all("~/R-dev/labmanager")
+```
+
+```{r list_stats, echo=FALSE, include=FALSE}
+owd <- setwd("~/sok-marine-biodiversity/")
+gom_worms_ <- remake::fetch("gom_worms")
+kozloff_worms_ <- remake::fetch("kozloff_worms")
+create_bindings()
+```
+
+# We don't know enough about marine biodiversity
+
+to understand the impact of human activites
+
+- What are the impacts of perturbations, pollution?
+- Which species are invasive?
+- How does global change affect communities?
+
+---
+
+# We don't know enough about marine biodiversity
+
+
+### How many species?
+
+```{r, echo=FALSE, fig.width=10, fig.height=5, dev='CairoSVG'}
+
+data.frame(
+    source = c("Described Species (WoRMS)",
+               "Appletans et al (2012) -- model",
+               "Appletans et al (2012) -- model",
+               "Appletans et al (2012) -- experts",
+               "Appletans et al (2012) -- experts",
+               "Costello et al (2013)",
+               "Costello et al (2013)",
+               "Mora et al (2011)",
+               "Poore & Wilson (1993)",
+               "Grasslet & Maciolek (1992)"),
+    estimate_type = c("expert",
+                      "stat model (low)",
+                      "stat model (high)",
+                      "expert (low)",
+                      "expert (high)",
+                      "stat model (low)",
+                      "stat model (high)",
+                      "extrapolation",
+                      "extrapolation",
+                      "extrapolation"),
+    number_species = c(226000,
+                       320000,
+                       760000 - 320000,
+                       704000,
+                       972000 - 704000,
+                       5000000 - 3000000,
+                       5000000 + 3000000 - 2000000,
+                       2200000,
+                       5000000,
+                       10000000),
+    stringsAsFactors = FALSE) %>%
+    ggplot(aes(x = reorder(source, number_species), y = number_species, fill = estimate_type)) +
+    geom_col() +
+    theme_minimal() +
+    coord_flip() +
+    xlab("Source") + ylab("Number of Species") #+
+    #theme(legend.position = "none")
+
+```
+
+---
+
+# We don't know enough about marine biodiversity
+
+### What are the species? (taxonomy)
+### How many species are there? (checklists)
+### Where do they live? (range maps)
+
+---
+
+
+# Where has the data been coming from?
+
+* Faunistic checklists from experts
+
+  > most comprehensive, limited in geographic scope
+
+--
+
+* Museum specimens
+
+  > identifications can be validated, can be difficult to access
+
+--
+
+* Described species
+
+  > requires expert knowledge to evaluate
+
+--
+
+* Species occurences records
+
+  > good for species ranges, difficult to validate
+
+---
+
+# Where has the data been coming from?
+
+## Until recently data has been scattered
+
+--
+
+## Development of digital biodiversity repositories
+
+* iDigBio: museum records
+* OBIS: occurrence records
+* WoRMS: accepted species names
+* BOLD: genetic data
+
+---
+
+# Assemble a checklist of marine invertebrates for the US
+
+### Approach: Use digital repositories
+
+--
+
+### Goals
+#### Evaluate completeness
+#### Identify knowledge gaps
+#### Offer recommendations
+
+---
+
+# Marine invertebrate checklist for the US
+
+* 257,100 museum records from iDigBio (12,927 species, 25 phyla)
+* 1,353,861
+occurence records from OBIS (14,907 species, 28 phyla)
+
+### 17,296 species in the US
+
+---
+
+# Museum Records
+
+```{r, echo=FALSE, results="hide", message=FALSE, dev="CairoSVG", fig.height=5.5, cache=TRUE}
+map_sampling <- make_heatmap(combined_data_map_samples,
+                             "Number of samples", base_map = map_eez) +
+    theme(legend.position = "bottom")
+
+map_sampling
+```
+---
+
+# Museum Records
+
+```{r, echo=FALSE, results="hide", message=FALSE, dev="CairoSVG", fig.height=5.5, cache=TRUE}
+map_diversity <- make_heatmap(combined_data_map_diversity,
+                              "Number of species", base_map = map_eez) +
+    theme(legend.position = "bottom")
+
+map_diversity
+```
+---
+
+# Museum Records
+
+```{r, echo=FALSE, dev="CairoSVG", fig.height=5.5}
+plot_sampling
+```
+
+
+---
+
+# Invertebrates are underrepresented
+
+```{r kingdom_comparison, echo=FALSE, dev="CairoSVG", fig.height=4.5, fig.width=10, cache=TRUE}
+kingdom_diversity %>%
+    ggplot(aes(x = reorder(sub_kingdom, prop_spp), y = prop_spp, fill = database)) +
+    geom_col(position = "dodge") + coord_flip() +
+    scale_fill_hc(name = "Source", labels = c("iDigBio", "OBIS", "Global diversity (WoRMS)")) +
+    ylim(c(0, .85)) +
+    xlab(NULL) + ylab("Proportion of total diversity (per source)") +
+    theme_ipsum(base_family = "Ubuntu Condensed", base_size=15)
+```
+
+### Number of samples:
+  - 3 records per species for Invertebrates
+  - 18 records per species for Vertebrates
+
+
+---
+
+# How complete is the list?
+
+### For molluscs: 60%
+### For crustaceans: 55%
+
+### At least 30,000 species of marine invertebrates in the US.
+
+---
+
+
+# Museum Records
+
+```{r, echo=FALSE, dev="CairoSVG", fig.height=5.5, warning=FALSE}
+idig_spp_through_time
+```
+---
+
+# Taxonomic expertise is dwindling
+
+
+```{r, dev="CairoSVG", echo=FALSE, warning=FALSE, message=FALSE, fig.height=5.5, fig.width=9.5, cache=TRUE}
+
+idigbio_us_inverts_records_all  %>%
+    dplyr::filter(!is.na(year)) %>%
+    ## count subspecies as species level identification
+    dplyr::mutate(rank = replace(rank, rank == "Subspecies", "Species")) %>%
+    dplyr::count(year, worms_phylum, rank) %>%
+    dplyr::group_by(year, worms_phylum) %>%
+    dplyr::mutate(p = n/sum(n),
+                  n_lots = sum(n)) %>%
+    dplyr::filter(rank == "Species",
+                  worms_phylum %in% c("annelida", "arthropoda", "porifera",
+                                      "cnidaria", "echinodermata", "mollusca")) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(worms_phylum = capitalize(worms_phylum),
+                  mean_p_id = roll_mean(p, 3, fill = NA)) %>%
+    ggplot(aes(colour = worms_phylum, fill = worms_phylum)) +
+    geom_point(aes(x = year, y = p, size = n_lots)) +
+    geom_hline(yintercept = 1) +
+    geom_smooth(aes(x = year, y = mean_p_id, colour = worms_phylum), se = FALSE) +
+    facet_wrap(~ worms_phylum) +
+    guides(color = FALSE, fill = FALSE) +
+    scale_size_continuous(name = "Number of specimens") +
+    labs(x = "Year", y = "Proportion of specimens identified at the species level") +
+    theme(legend.position = "top") +
+    scale_colour_hc() + scale_fill_hc()
+
+```
+
+---
+
+# Recommendations
+
+## Improve existing data
+
+* clean up species names, add geographic coordinates
+
+## Use molecular data to speed up biodiversity documentation
+
+---
+
+# Speeding-up Biodiversity Documentation
+
+## DNA Barcoding
+
+<img src="images/barcoding.png" height="300px"/>
+
+---
+
+# Speeding-up Biodiversity Documentation
+
+## Using metabarcoding
+
+<img src="images/metabarcoding.png" height="300px" />
+
+
+---
+
+# Speeding-up Biodiversity Documentation
+
+## Using metabarcoding
+
+
+.pull-left[
+
+### What can it tell us?
+
+* Number of species
+* Where are the species distributed?
+* Applicable to many types of environmental samples
+* **Well-suited for monitoring**
+
+### Pre-requisites
+
+* Comprehensive and accurate databases
+
+]
+
+
+.pull-right[<img src="images/metabarcoding.png" height="200px" />]
+
+---
+
+# Current levels of DNA barcoding in the US
+
+
+```{r, dev="CairoSVG", echo=FALSE, warning=FALSE, message=FALSE, fig.height=5.5,  cache=TRUE}
+bold_data <- barcode_status_data
+
+plot_order <- bold_data %>%
+        dplyr::filter(data_source == "all_idigbio") %>%
+        dplyr::arrange(p_has_bold) %>%
+        pull(phylum)
+
+bold_data %>%
+    dplyr::filter(data_source=="all_idigbio") %>%
+    ggplot(aes(x = factor(phylum, levels = plot_order), y = p_has_bold)) +
+    geom_col(position = "dodge") +
+    xlab("") + ylab("Proportion of species with available DNA barcodes") +
+    scale_fill_viridis(discrete = TRUE,
+                       name = "") +
+    theme_ipsum(base_family = "Ubuntu Condensed") +
+    coord_flip()
+```
+
+---
+
+# Recommendations
+
+### Improve existing data
+### Use molecular data to speed-up biodiversity documentation
+### Invest in sampling and training 
+
+
+
+---
+
+# Thank you
+
+* UFBI
+* The Whitney Lab
+* Biodiversity Information Systems:
+  - iDigBio
+  - GBIF
+  - OBIS
+* rOpenSci
+
+---
+class: inverse, center, middle
+
+# Questions?
+
+
+```{r end}
+
+delete_bindings()
+setwd(owd)
+
+```
