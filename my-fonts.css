@@ -1,13 +1,30 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Condensed');
 
 body {
-  font-family: 'Ubuntu';
-  font-weight: normal;
+    font-family: 'Lato';
+    font-weight: normal;
 }
 
 h1, h2, h3 {
-  font-family: 'Yanone Kaffeesatz';
-  font-weight: normal;
+    font-family: 'Roboto Condensed';
+    font-weight: normal;
+}
+
+.remark-slide-content h1 {
+    font-size: 52px;
+    line-height: 49px;
+    font-weight: bold;
+}
+
+.remark-slide-content h2 {
+    font-size: 42px;
+    line-height: 39px;
+}
+
+
+.remark-slide-content h3 {
+    font-size: 35px;
+    line-height: 33px;
 }
 
 img {

@@ -1,8 +1,8 @@
 ---
 title: "A State of Knowledge of Marine Invertebrate Biodiversity in the US"
 subtitle: ""
-author: "François Michonneau, <br> Postdoctoral Researcher, Whitney Lab/FLMNH <br><br> Gustav Paulay, Mark Martindale"
-date: "Jan 25th, 2018"
+author: "François Michonneau, <br> Gustav Paulay, Mark Martindale"
+date: "June 4th, 2018"
 output:
   xaringan::moon_reader:
     css: [default, my-fonts.css]
@@ -37,6 +37,11 @@ to understand the impact of human activites
 - What are the impacts of perturbations, pollution?
 - Which species are invasive?
 - How does global change affect communities?
+
+--
+
+### Invertebrates represent 75+% of the marine diversity
+
 
 ---
 
@@ -101,33 +106,31 @@ data.frame(
 
 # Where has the data been coming from?
 
-* Faunistic checklists from experts
+### Faunistic checklists from experts
 
-  > most comprehensive, limited in geographic scope
-
---
-
-* Museum specimens
-
-  > identifications can be validated, can be difficult to access
+  * most comprehensive, limited in geographic scope
 
 --
 
-* Described species
+### Museum specimens
 
-  > requires expert knowledge to evaluate
+  * identifications can be validated, can be difficult to access
 
 --
 
-* Species occurences records
+### Described species
 
-  > good for species ranges, difficult to validate
+  * requires expert knowledge to evaluate
+
+--
+
+### Species occurences records
+
+  * good for species ranges, difficult to validate
 
 ---
 
 # Where has the data been coming from?
-
-## Until recently data has been scattered
 
 --
 
@@ -147,19 +150,22 @@ data.frame(
 --
 
 ### Goals
-#### Evaluate completeness
-#### Identify knowledge gaps
-#### Provide recommendations
+
+#### > Evaluate completeness
+#### > Identify knowledge gaps
+#### > Provide recommendations
 
 ---
 
 # Marine invertebrate checklist for the US
 
-* 257,100 museum records from iDigBio (12,927 species, 25 phyla)
+* 244,090 museum records from iDigBio (11,362 species, 26 phyla)
 * 1,353,861
 occurence records from OBIS (14,907 species, 28 phyla)
 
-### 17,296 species in the US
+--
+
+### 16,939 species in the US
 
 ---
 
@@ -188,7 +194,7 @@ map_diversity
 # Museum Records
 
 ```{r, echo=FALSE, dev="CairoSVG", fig.height=5.5}
-plot_sampling
+plot_sampling_effort(combined_data_map_standardized_diversity)
 ```
 
 
@@ -209,8 +215,8 @@ kingdom_diversity %>%
 --
 
 ### Number of samples:
-  - 3 records per species for Invertebrates
-  - 18 records per species for Vertebrates
+  - 3 records per species for *Invertebrates*
+  - 18 records per species for *Vertebrates*
 
 
 ---
@@ -232,7 +238,7 @@ kingdom_diversity %>%
 # Museum Records
 
 ```{r, echo=FALSE, dev="CairoSVG", fig.height=5.5, warning=FALSE}
-idig_spp_through_time
+idigbio_species_through_time
 ```
 ---
 
