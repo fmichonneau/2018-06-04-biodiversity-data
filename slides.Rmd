@@ -32,11 +32,11 @@ create_bindings()
 
 # We don't know enough about marine biodiversity
 
-to understand the impact of human activites
+to document and understand the impact of human activites
 
 - What are the impacts of perturbations, pollution?
 - Which species are invasive?
-- How does global change affect communities?
+- How does global change affect biological communities?
 
 --
 
@@ -97,9 +97,12 @@ data.frame(
 
 # We don't know enough about marine biodiversity
 
-### What are the species? (taxonomy)
-### How many species are there? (checklists)
-### Where do they live? (range maps)
+### How many species?
+### What are the species?
+
+--
+
+### Where do they live?
 
 ---
 
@@ -118,13 +121,13 @@ data.frame(
 
 --
 
-### Described species
+### Species descriptions
 
   * requires expert knowledge to evaluate
 
 --
 
-### Species occurences records
+### Species occurrence records
 
   * good for species ranges, difficult to validate
 
@@ -143,25 +146,25 @@ data.frame(
 
 ---
 
-# Assemble a checklist of marine invertebrates for the US
+# Synthesize current knowledge of US marine invertebrates biodiversity
 
-### Approach: Use digital repositories
+
+### Combine and compare data sources
 
 --
 
 ### Goals
 
-#### > Evaluate completeness
-#### > Identify knowledge gaps
-#### > Provide recommendations
+#### 1. Evaluate completeness
+#### 2. Identify digitization and knowledge gaps
+#### 3. Provide recommendations
 
 ---
 
 # Marine invertebrate checklist for the US
 
 * 244,090 museum records from iDigBio (11,362 species, 26 phyla)
-* 1,353,861
-occurence records from OBIS (14,907 species, 28 phyla)
+* 1,353,861 occurence records from OBIS (14,907 species, 28 phyla)
 
 --
 
@@ -197,31 +200,11 @@ map_diversity
 plot_sampling_effort(combined_data_map_standardized_diversity)
 ```
 
-
----
-
-# Invertebrates are underrepresented
-
-```{r kingdom_comparison, echo=FALSE, dev="CairoSVG", fig.height=4.5, fig.width=10, cache=TRUE}
-kingdom_diversity %>%
-    ggplot(aes(x = reorder(sub_kingdom, prop_spp), y = prop_spp, fill = database)) +
-    geom_col(position = "dodge") + coord_flip() +
-    scale_fill_hc(name = "Source", labels = c("iDigBio", "OBIS", "Global diversity (WoRMS)")) +
-    ylim(c(0, .85)) +
-    xlab(NULL) + ylab("Proportion of total diversity (per source)") +
-    theme_ipsum(base_family = "Ubuntu Condensed", base_size=15)
-```
-
---
-
-### Number of samples:
-  - 3 records per species for *Invertebrates*
-  - 18 records per species for *Vertebrates*
-
-
 ---
 
 # How complete is the list?
+
+Comparison with taxonomic checklists
 
 ### For molluscs: 60%
 ### For crustaceans: 55%
@@ -331,8 +314,7 @@ idigbio_us_inverts_records_all  %>%
 
 ---
 
-# Current levels of DNA barcoding in the US
-
+# 20% of the species have DNA barcodes available
 
 ```{r, dev="CairoSVG", echo=FALSE, warning=FALSE, message=FALSE, fig.height=5.5, cache=TRUE}
 bold_data <- barcode_status_data
@@ -359,7 +341,13 @@ bold_data %>%
 # Recommendations
 
 ### Improve existing data
+
+--
+
 ### Use molecular data to speed-up biodiversity documentation
+
+--
+
 ### Invest in sampling and taxonomic training
 
 
@@ -376,6 +364,7 @@ bold_data %>%
   - iDigBio
   - GBIF
   - OBIS
+  - WoRMS
 
 ### rOpenSci
 
