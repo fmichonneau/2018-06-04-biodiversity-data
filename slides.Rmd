@@ -334,7 +334,7 @@ idigbio_us_inverts_records_all  %>%
 # Current levels of DNA barcoding in the US
 
 
-```{r, dev="CairoSVG", echo=FALSE, warning=FALSE, message=FALSE, fig.height=5.5,  cache=TRUE}
+```{r, dev="CairoSVG", echo=FALSE, warning=FALSE, message=FALSE, fig.height=5.5, cache=TRUE}
 bold_data <- barcode_status_data
 
 plot_order <- bold_data %>%
@@ -344,13 +344,14 @@ plot_order <- bold_data %>%
 
 bold_data %>%
     dplyr::filter(data_source=="all_idigbio") %>%
-    ggplot(aes(x = factor(phylum, levels = plot_order), y = p_has_bold)) +
+    ggplot(aes(x = factor(phylum, levels = plot_order), y = p_has_bold, fill=phylum)) +
     geom_col(position = "dodge") +
     xlab("") + ylab("Proportion of species with available DNA barcodes") +
     scale_fill_viridis(discrete = TRUE,
                        name = "") +
     theme_ipsum(base_family = "Ubuntu Condensed") +
-    coord_flip()
+    coord_flip() +
+    theme(legend.position="none")
 ```
 
 ---
@@ -359,7 +360,7 @@ bold_data %>%
 
 ### Improve existing data
 ### Use molecular data to speed-up biodiversity documentation
-### Invest in sampling and training 
+### Invest in sampling and taxonomic training
 
 
 
